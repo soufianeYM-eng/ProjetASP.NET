@@ -1,0 +1,39 @@
+﻿@page
+@model ProjetASP.NET.Pages.Modules.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<form method="post">
+    <div class="white-background border text-white">
+        <h2 class="text-white">Supprimer Module</h2>
+        <br />
+        <hr />
+        <div class="form-group row">
+            <input type="hidden" asp-for="Module.IdModule" />
+            <div class="col-6">
+                <div class="mb-3">
+                    <label asp-for="Module.Code" class="form-label">Nom Filière</label>
+                    <input type="text" class="form-control" asp-for="Module.Code" readonly>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Module.Nom" class="form-label">Abréviation</label>
+                    <input type="text" class="form-control" asp-for="Module.Nom" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+                <a asp-page="Index" class="btn btn-success">Retour</a>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

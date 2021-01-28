@@ -1,0 +1,83 @@
+﻿@page
+@model ProjetASP.NET.Pages.Users.IndexModel
+@{
+    ViewData["Title"] = "Utilisateurs";
+
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<form asp-page="Index" method="get">
+    <div class="border white-background">
+        <div class="row">
+            <div class="col-6">
+                <h2 class="text-white">Liste des utilisateurs</h2>
+            </div>
+            <div class="col-6 text-right">
+                <a class="btn btn-primary" asp-page="/Account/Register" asp-area="Identity"><i class="fa fa-plus-square"></i> Ajouter un utilisateur</a>
+            </div>
+        </div>
+
+        <div style="height:60px" class="container border border-secondary">
+            <div class="row">
+                <div class="col-11">
+                    <div class="row" style="padding-top:10px">
+                        <div class="col-4">
+                            @Html.Editor("chercherCIN", new { htmlAttributes = new { @class = "form-control", placeholder = "CIN....." } })
+                        </div>
+                        <div class="col-4">
+                            @Html.Editor("chercherNom", new { htmlAttributes = new { @class = "form-control", placeholder = "Nom....." } })
+                        </div>
+                        <div class="col-4">
+                            @Html.Editor("chercherMail", new { htmlAttributes = new { @class = "form-control", placeholder = "Email....." } })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <div class="row" style="padding-top:10px; padding-right:15px;">
+                        <button type="submit" class="btn btn-primary form-control"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            @if (Model.ApplicationUsersList.Count() == 0)
+            {
+                <p class="text-danger">Aucun compte n'existe maintenant</p>
+            }
+            else
+            {
+                <table class="table text-white">
+                    <thead>
+                        <tr>
+                            <th>CIN</th>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Email</th>
+                            <th>Tél</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ApplicationUsersList)
+                        {
+                        <tr>
+                            <td>@Html.DisplayFor(m => item.CIN)</td>
+                            <td>@Html.DisplayFor(m => item.LastName)</td>
+                            <td>@Html.DisplayFor(m => item.FirstName)</td>
+                            <td>@Html.DisplayFor(m => item.Email)</td>
+                            <td>@Html.DisplayFor(m => item.PhoneNumber)</td>
+                            <td>
+                                <a class="btn btn-danger" asp-route-id="@item.Id" asp-page="Delete" asp-page-handler="Delete"><i class="fa fa-trash"></i></a>
+                                <a class="btn btn-success" asp-route-id="@item.Id" asp-page="Edit"><i class="fa fa-edit"></i></a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+
+        </div>
+    </div>
+</form>

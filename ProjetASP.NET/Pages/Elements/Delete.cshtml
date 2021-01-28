@@ -1,0 +1,37 @@
+﻿@page
+@model ProjetASP.NET.Pages.Elements.DeleteModel
+@{
+    ViewData["Title"] = "Eléments";
+
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+<form method="post">
+    @Html.HiddenFor(m => m.Element.IdElement)
+    @Html.HiddenFor(m => m.Element.IdModule)
+    <div class="white-background border text-white">
+        <h2 class="text-white">Supprimer Element</h2>
+        <br />
+        <hr />
+        <div class="form-group row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label asp-for="Element.Nom" class="control-label"></label>
+                    <input asp-for="Element.Nom" class="form-control" readonly/>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Element.pourcentage" class="control-label"></label>
+                    <input asp-for="Element.pourcentage" class="form-control" readonly/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('vous etes sur ?')">Supprimer</button>
+                <a asp-page="Index" asp-route-IdModule="@Model.Element.IdModule" class="btn btn-success">Retour</a>
+            </div>
+
+        </div>
+    </div>
+</form>

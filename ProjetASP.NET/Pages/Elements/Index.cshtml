@@ -1,0 +1,95 @@
+﻿@page
+@model ProjetASP.NET.Pages.Elements.IndexModel
+@{
+    ViewData["Title"] = "Eléments";
+
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div class="container white-background">
+    <div class="card text-dark">
+        <div class="card-header bg-dark text-light row container ml-0">
+            <div class="col-6">
+                <i class="fa fa-leanpub fa-2x"></i>
+            </div>
+            <div class="col-6 text-right">
+                <a asp-page="../Modules/Index" class="btn btn-dark" style="background-color: #2F3A4D">Retour</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-3">
+                    <a asp-page="Create" asp-route-IdModule="@Model.ModulesEtElementsVM.ModuleObj.IdModule" class="btn btn-dark form-control" style="background-color: #2F3A4D">
+                        <i class="fa fa-plus"></i> Ajouter un Elément
+                    </a>
+                </div>
+                <div class="col-6 offset-3">
+                    <div class="row form-group">
+                        <div class="col-4">
+                            <label asp-for="ModulesEtElementsVM.ModuleObj.Code"></label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" asp-for="ModulesEtElementsVM.ModuleObj.Code" readonly />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-4">
+                            <label asp-for="ModulesEtElementsVM.ModuleObj.Nom"></label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" asp-for="ModulesEtElementsVM.ModuleObj.Nom" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <br />
+        @if (Model.ModulesEtElementsVM.Elements.Count() == 0)
+        {
+            <p class="text-danger">Aucun elément n'existe pour ce module</p>
+        }
+        else
+        {
+            <table class="table text-dark">
+                <thead>
+                    <tr>
+                        <th>Id Elément</th>
+                        <th>Nom</th>
+                        <th>Pourcentage</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ModulesEtElementsVM.Elements)
+                    {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.IdElement)</td>
+                        <td>@Html.DisplayFor(m => item.Nom)</td>
+                        <td>@Html.DisplayFor(m => item.pourcentage) %</td>
+                        <td>
+                            <a class="btn btn-danger" asp-route-id="@item.IdElement" asp-page="Delete" asp-page-handler="Delete"><i class="fa fa-trash"></i> Supprimer</a>
+                            <a class="btn btn-success" asp-route-id="@item.IdElement" asp-page="Edit"><i class="fa fa-edit"></i> Modifier</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+
+    </div>
+        </div>
+    </div>
+
+</div>   
+
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

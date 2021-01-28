@@ -1,0 +1,48 @@
+﻿@page
+@model ProjetASP.NET.Pages.Elements.EditModel
+@{
+    ViewData["Title"] = "Eléments";
+
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+    @Html.HiddenFor(m=>m.Element.IdElement)
+    @Html.HiddenFor(m => m.Element.IdModule)
+    <div class="white-background border text-white">
+        <h2 class="text-white">Modifier Element</h2>
+        <br />
+        <hr />
+        <div class="form-group row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label asp-for="Element.Nom" class="control-label"></label>
+                    <input asp-for="Element.Nom" class="form-control" />
+                    <span asp-validation-for="Element.Nom" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Element.pourcentage" class="control-label"></label>
+                    <input asp-for="Element.pourcentage" class="form-control" />
+                    <span asp-validation-for="Element.pourcentage" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary">Modifier</button>
+                <a asp-page="Index" asp-route-IdModule="@Model.Element.IdModule" class="btn btn-success">Retour</a>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

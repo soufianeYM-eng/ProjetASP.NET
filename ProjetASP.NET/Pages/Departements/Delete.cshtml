@@ -1,0 +1,31 @@
+﻿@page
+@model ProjetASP.NET.Pages.Departements.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+    <div class="white-background border text-white">
+        <h2 class="text-white">Supprimer Département</h2>
+        <br />
+        <hr />
+        <div class="form-group row">
+            <input type="hidden" asp-for="Departement.IdDept" />
+            <div class="col-6">
+                <div class="mb-3">
+                    <label asp-for="Departement.Nom" class="control-label"></label>
+                    <input asp-for="Departement.Nom" class="form-control" readonly/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+                <a asp-page="Index" class="btn btn-success">Retour</a>
+            </div>
+
+        </div>
+    </div>
+</form>

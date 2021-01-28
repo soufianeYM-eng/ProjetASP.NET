@@ -1,0 +1,55 @@
+﻿@page
+@model ProjetASP.NET.Pages.Users.DeleteModel
+@{
+    ViewData["Title"] = "Utilisateurs";
+
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="white-background row text-white">
+    <div class="col-md-6">
+        <form method="post">
+            <h4>Supprimer un compte</h4>
+            <hr />
+            @Html.HiddenFor(m => m.ApplicationUser.Id)
+            <div class="form-group">
+                <label asp-for="ApplicationUser.CIN">CIN</label>
+                <input asp-for="ApplicationUser.CIN" class="form-control" placeholder="KA125478" readonly/>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationUser.FirstName">Prénom</label>
+                <input asp-for="ApplicationUser.FirstName" class="form-control" readonly/>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationUser.LastName">Nom</label>
+                <input asp-for="ApplicationUser.LastName" class="form-control" readonly/>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationUser.Email">Email Institutionnel</label>
+                <input asp-for="ApplicationUser.Email" type="email" class="form-control" placeholder="nom.prenom@etu.uae.ac.ma" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationUser.Adress">Adresse</label>
+                <input asp-for="ApplicationUser.Adress" class="form-control" placeholder="5 Rue Fes Résidence"readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationUser.City">Ville</label>
+                <input asp-for="ApplicationUser.City" class="form-control" placeholder="Tanger"readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationUser.PhoneNumber">Tél</label>
+                <input asp-for="ApplicationUser.PhoneNumber" type="number" class="form-control" placeholder="+212654875986" readonly/>
+            </div>
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+            <a asp-page="Index" class="btn btn-success">Retour</a>
+        </form>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

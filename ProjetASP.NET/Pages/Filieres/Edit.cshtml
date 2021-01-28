@@ -1,0 +1,44 @@
+﻿@page
+@model ProjetASP.NET.Pages.Filieres.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+<form method="post">
+    <div class="white-background border text-white">
+        <h2 class="text-white">Modifier Filière</h2>
+        <br />
+        <hr />
+        <div class="form-group row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Filiere.IdFil" />
+            <div class="col-6">
+                <div class="mb-3">
+                    <label asp-for="Filiere.Nom" class="form-label">Nom Filière</label>
+                    <input type="text" class="form-control" asp-for="Filiere.Nom" placeholder="exp : Génie informatique">
+                </div>
+                <span class="text-danger" asp-validation-for="Filiere.Nom"></span>
+                <div class="mb-3">
+                    <label asp-for="Filiere.Abrev" class="form-label">Abréviation</label>
+                    <input type="text" class="form-control" asp-for="Filiere.Abrev" placeholder="exp : GINF">
+                </div>
+                <span class="text-danger" asp-validation-for="Filiere.Abrev"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary">Modifier</button>
+                <a asp-page="Index" class="btn btn-success">Retour</a>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

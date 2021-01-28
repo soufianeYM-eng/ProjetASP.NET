@@ -1,0 +1,39 @@
+﻿@page
+@model ProjetASP.NET.Pages.Edt.IndexModel
+@{
+    ViewData["Title"] = "Emploi du temps";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="white-background border text-white">
+    <h2 class="text-white">Emploi du temps selon la filière</h2>
+    <br />
+    <hr />
+    <div class="row">
+        <div class="col-8">
+            <h2>Login :</h2>
+            <p><strong>AP1:</strong> 1ère année classes preparatoires</p>
+            <p><strong>AP2:</strong> 2ème année classes preparatoires</p>
+            <p><strong>GINF1:</strong> 1ère année Génie Informatique</p>
+            <p><strong>GINF2:</strong> 2ème année Génie Informatique</p>
+            <p><strong>GINF3:</strong> 3ème année Génie Informatique</p>
+            <p><strong>GSTR1:</strong> 1ère année Génie des Systèmes de télécommunication et Réseaux</p>
+            <p><strong>GSTR2:</strong> 2ème année Génie des Systèmes de télécommunication et Réseaux</p>
+            <p><strong>GSTR3:</strong> 3ème année Génie des Systèmes de télécommunication et Réseaux</p>
+            <p><strong>GSEA1:</strong> 1ère année Génie des Systèmes électroniques et Automatiques</p>
+            <p><strong>GSEA2:</strong> 2ème année Génie des Systèmes électroniques et Automatiques</p>
+            <p><strong>GSEA3:</strong> 3ème année Génie des Systèmes électroniques et Automatiques</p>
+            <p><strong>G3EI1:</strong> 1ère année Génie Eco-Energétique et Environnement Industriel</p>
+            <p><strong>G3EI2:</strong> 2ème année Génie Eco-Energétique et Environnement Industriel</p>
+            <p><strong>G3EI3:</strong> 3ème année Génie Eco-Energétique et Environnement Industriel</p>
+            <p><strong>GIL1:</strong> 1ère année Génie Industriel et Logistique</p>
+            <p><strong>GIL2:</strong> 2ème année Génie Industriel et Logistique</p>
+            <p><strong>GIL3:</strong> 3ème année Génie Industriel et Logistique</p>
+        </div>
+        <div class="col-4">
+            <a href="http://app-ensat.uae.ac.ma/edt/" target="_blank" style="text-decoration:none;"class="btn btn-warning form-control mb-1">Emploi du temps</a><br />
+            <a asp-page="../Index" class="btn btn-success form-control">Retour</a>
+        </div>
+
+    </div>
+</div>

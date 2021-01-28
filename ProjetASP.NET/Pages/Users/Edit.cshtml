@@ -1,0 +1,64 @@
+﻿@page
+@model ProjetASP.NET.Pages.Users.EditModel
+@{
+    ViewData["Title"] = "Utilisateurs";
+
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="white-background row text-white">
+    <div class="col-md-6">
+        <form method="post">
+            <h4>Modifier un compte</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            @Html.HiddenFor(m=>m.ApplicationUser.Id)
+            <div class="form-group">
+                <label asp-for="ApplicationUser.CIN">CIN</label>
+                <input asp-for="ApplicationUser.CIN" class="form-control" placeholder="KA125478" />
+                <span asp-validation-for="ApplicationUser.CIN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationUser.FirstName">Prénom</label>
+                <input asp-for="ApplicationUser.FirstName" class="form-control" />
+                <span asp-validation-for="ApplicationUser.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationUser.LastName">Nom</label>
+                <input asp-for="ApplicationUser.LastName" class="form-control" />
+                <span asp-validation-for="ApplicationUser.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationUser.Email">Email Institutionnel</label>
+                <input asp-for="ApplicationUser.Email" type="email" class="form-control" placeholder="nom.prenom@etu.uae.ac.ma" readonly />
+                <span asp-validation-for="ApplicationUser.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationUser.Adress">Adresse</label>
+                <input asp-for="ApplicationUser.Adress" class="form-control" placeholder="5 Rue Fes Résidence" />
+                <span asp-validation-for="ApplicationUser.Adress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationUser.City">Ville</label>
+                <input asp-for="ApplicationUser.City" class="form-control" placeholder="Tanger" />
+                <span asp-validation-for="ApplicationUser.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationUser.PhoneNumber">Tél</label>
+                <input asp-for="ApplicationUser.PhoneNumber" type="number" class="form-control" placeholder="+212654875986" />
+                <span asp-validation-for="ApplicationUser.PhoneNumber" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Modifier</button>
+            <a asp-page="Index" class="btn btn-success">Retour</a>
+        </form>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

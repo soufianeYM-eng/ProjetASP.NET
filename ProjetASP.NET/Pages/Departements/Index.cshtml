@@ -1,0 +1,54 @@
+﻿@page
+@model ProjetASP.NET.Pages.Departements.IndexModel
+@{
+    ViewData["Title"] = "Index";
+
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<br />
+
+<div class="border white-background">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-white">Départements</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a class="btn btn-primary" asp-page="Create"><i class="fa fa-plus-square"></i> Créer un département</a>
+        </div>
+    </div>
+
+    <div>
+        @if (Model.Departements.Count() == 0)
+        {
+        <p class="text-danger">Aucun département n'existe maintenant</p>
+        }
+        else
+        {
+        <table class="table text-white">
+            <thead>
+                <tr>
+                    <th>Id Filière</th>
+                    <th>Nom</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Departements)
+                    {
+                <tr>
+                    <td>@Html.DisplayFor(m => item.IdDept)</td>
+                    <td>@Html.DisplayFor(m => item.Nom)</td>
+                    <td>
+                        <a class="btn btn-danger" asp-route-id="@item.IdDept" asp-page="Delete" asp-page-handler="Delete"><i class="fa fa-trash"></i></a>
+                        <a class="btn btn-success" asp-route-id="@item.IdDept" asp-page="Edit"><i class="fa fa-edit"></i></a>
+                    </td>
+                </tr>
+                    }
+            </tbody>
+        </table>
+        }
+
+
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿@page
+@model ProjetASP.NET.Pages.Departements.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+<form method="post">
+    <div class="white-background border text-white">
+        <h2 class="text-white">Modifier Département</h2>
+        <br />
+        <hr />
+        <div class="form-group row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Departement.IdDept" />
+            <div class="col-6">
+                <div class="mb-3">
+                    <label asp-for="Departement.Nom" class="control-label"></label>
+                    <input asp-for="Departement.Nom" class="form-control" />
+                    <span asp-validation-for="Departement.Nom" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary">Modifier</button>
+                <a asp-page="Index" class="btn btn-success">Retour</a>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
