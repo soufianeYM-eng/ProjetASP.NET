@@ -20,6 +20,8 @@ namespace ProjetASP.NET.Models
         [ForeignKey("IdModule")]
         public Module Module { get; set; }
 
+        public string userId { get; set; }
+
 
     }
 }

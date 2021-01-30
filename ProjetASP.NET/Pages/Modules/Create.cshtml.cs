@@ -15,34 +15,38 @@ namespace ProjetASP.NET.Pages.Modules
     [Authorize(Roles = SD.AdminEndUser)]
     public class CreateModel : PageModel
     {
-        private readonly ProjetASP.NET.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext db;
 
-        public CreateModel(ProjetASP.NET.Data.ApplicationDbContext context)
+        public CreateModel(ApplicationDbContext db)
         {
-            _context = context;
-        }
-
-        public IActionResult OnGet()
-        {
-            return Page();
+            this.db = db;
         }
 
         [BindProperty]
         public Module Module { get; set; }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+
+        [TempData]
+        public string StatusMessage { get; set; }
+
+
+        public async Task<IActionResult> OnGet(int IdFil)
         {
-            if (!ModelState.IsValid)
+            Module = new Module();
+            Module.IdFil = IdFil;
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPost()
+        {
+            if (ModelState.IsValid)
             {
-                return Page();
+                await db.Modules.AddAsync(Module);
+                await db.SaveChangesAsync();
+                StatusMessage = "Ajout réussi avec succès";
+                return RedirectToPage("Index", new { IdFil = Module.IdFil });
             }
-
-            _context.Modules.Add(Module);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            return Page();
         }
     }
 }

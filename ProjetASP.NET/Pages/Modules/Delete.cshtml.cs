@@ -15,48 +15,37 @@ namespace ProjetASP.NET.Pages.Modules
     [Authorize(Roles = SD.AdminEndUser)]
     public class DeleteModel : PageModel
     {
-        private readonly ProjetASP.NET.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext db;
 
-        public DeleteModel(ProjetASP.NET.Data.ApplicationDbContext context)
+        public DeleteModel(ApplicationDbContext db)
         {
-            _context = context;
+            this.db = db;
         }
 
         [BindProperty]
         public Module Module { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+
+        [TempData]
+        public string StatusMessage { get; set; }
+
+
+        public async Task<IActionResult> OnGet(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            Module = await db.Modules.FindAsync(id);
 
-            Module = await _context.Modules.FirstOrDefaultAsync(m => m.IdModule == id);
-
-            if (Module == null)
-            {
-                return NotFound();
-            }
             return Page();
+
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPost()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            Module = await _context.Modules.FindAsync(id);
-
-            if (Module != null)
-            {
-                _context.Modules.Remove(Module);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
+            var ModuleObj = await db.Modules.FindAsync(Module.IdModule);
+            db.Modules.Remove(ModuleObj);
+            await db.SaveChangesAsync();
+            StatusMessage = "Element supprimer avec succès";
+            return RedirectToPage("Index", new { IdFil = Module.IdFil });
         }
     }
 }

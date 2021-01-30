@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using ProjetASP.NET.Data;
 using ProjetASP.NET.Models;
 using ProjetASP.NET.Utility;
 
@@ -75,7 +76,9 @@ namespace ProjetASP.NET.Areas.Identity.Pages.Account
             public string City { get; set; }
             [Required]
             public string PhoneNumber { get; set; }
-
+            
+            public int IdDept { get; set; }
+            public int IdFil { get; set; }
             public int RoleIS { get; set; }
         }
 
@@ -91,6 +94,7 @@ namespace ProjetASP.NET.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+
                 var user = new ApplicationUser { UserName = Input.Email,
                     Email = Input.Email,
                     CIN = Input.CIN,
@@ -98,9 +102,14 @@ namespace ProjetASP.NET.Areas.Identity.Pages.Account
                     LastName = Input.LastName,
                     Adress = Input.Adress,
                     City = Input.City,
-                    PhoneNumber = Input.PhoneNumber
-
+                    PhoneNumber = Input.PhoneNumber,
+                    IdFil = Input.IdFil,
+                    IdDept = Input.IdDept
                 };
+
+               
+
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

@@ -5,6 +5,28 @@
 }
 @using ProjetASP.NET.Utility
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    function yesnoCheck(that) {
+        if (that.value == 1) {
+
+            document.getElementById("Prof").style.display = "none";
+            document.getElementById("Etudiant").style.display = "block";
+        } else if (that.value == 2) {
+            document.getElementById("Etudiant").style.display = "none";
+            document.getElementById("Prof").style.display = "block";
+
+        } else {
+            document.getElementById("Etudiant").style.display = "none";
+            document.getElementById("Prof").style.display = "none";
+        }
+
+    }
+</script>
+
+
+
 <div class="white-background row text-white">
     <div class="col-md-6">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
@@ -44,29 +66,33 @@
 
             @if (User.IsInRole(SD.AdminEndUser))
             {
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" value="0" asp-for="Input.RoleIS">
-                    <label class="form-check-label" asp-for="Input.RoleIS">
-                        Administrateur
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" value="1" asp-for="Input.RoleIS">
-                    <label class="form-check-label" asp-for="Input.RoleIS">
-                        Etudiant
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" value="2" asp-for="Input.RoleIS">
-                    <label class="form-check-label" asp-for="Input.RoleIS">
-                        Professeur
-                    </label>
-                </div>
+                <select onchange="yesnoCheck(this);" asp-for="Input.RoleIS">
+                    <option value="0">Administrateur</option>
+                    <option value="1">Etudiant</option>
+                    <option value="2">Professeur</option>
+                </select>
             }
 
-            
 
+
+
+            <div id="Etudiant" style="display: none;">
+                <select asp-for="Input.IdFil">
+                    <option value="0">Select</option>
+                    <option value="1">Ginf</option>
+                    <option value="5">Gsea</option>
+
+                </select><br />
+            </div>
+            <div id="Prof" style="display: none;">
+                <select asp-for="Input.IdDept">
+                    <option value="0">Select</option>
+                    <option value="2">Mi</option>
+                    <option value="3">GEI</option>
+                    <option value="4">SIC</option>
+
+                </select><br />
+            </div>
 
             <div class="form-group">
                 <label asp-for="Input.Adress">Adresse</label>

@@ -8,55 +8,96 @@
 
 <br />
 
-<div class="border white-background">
-    <div class="row">
-        <div class="col-6">
-            <h2 class="text-white">Modules</h2>
+
+
+<div class="container white-background">
+    <div class="card text-dark">
+        <div class="card-header bg-dark text-light row container ml-0">
+            <div class="col-6">
+                <i class="fa fa-leanpub fa-2x"></i>
+            </div>
+            <div class="col-6 text-right">
+                <a asp-page="../Filieres/Index" class="btn btn-dark" style="background-color: #2F3A4D">Retour</a>
+            </div>
         </div>
-        <div class="col-6 text-right">
-            <a class="btn btn-primary" asp-page="Create"><i class="fa fa-plus-square"></i> Ajouter un Module</a>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-3">
+                    <a asp-page="Create" asp-route-IdFil="@Model.FiliereEtModulesViewModel.FiliereObj.IdFil" class="btn btn-dark form-control" style="background-color: #2F3A4D">
+                        <i class="fa fa-plus"></i> Ajouter un Module
+                    </a>
+                </div>
+                <div class="col-6 offset-3">
+                    <div class="row form-group">
+                        <div class="col-4">
+                            <label asp-for="FiliereEtModulesViewModel.FiliereObj.Nom"></label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" asp-for="FiliereEtModulesViewModel.FiliereObj.Nom" readonly />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-4">
+                            <label asp-for="FiliereEtModulesViewModel.FiliereObj.Abrev"></label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" asp-for="FiliereEtModulesViewModel.FiliereObj.Abrev" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <br />
+                @if (Model.FiliereEtModulesViewModel.Modules.Count() == 0)
+                {
+                    <p class="text-danger">Aucun elément n'existe pour ce module</p>
+                }
+                else
+                {
+                    <table class="table text-dark">
+                        <thead>
+                            <tr>
+                                <th>Id Module</th>
+                                <th>Code</th>
+                                <th>Nom</th>
+                                <th>Elements</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.FiliereEtModulesViewModel.Modules)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(m => item.IdModule)</td>
+                                    <td>@Html.DisplayFor(m => item.Code)</td>
+                                    <td>@Html.DisplayFor(m => item.Nom)</td>
+                                    <td>
+                                        <a asp-page="../Elements/Index" asp-route-IdModule="@item.IdModule" style="text-decoration:none;">
+                                            <i class="fa fa-th-list"></i> Voir eléments
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-danger" asp-route-id="@item.IdModule" asp-page="Delete" asp-page-handler="Delete"><i class="fa fa-trash"></i> Supprimer</a>
+                                        <a class="btn btn-success" asp-route-id="@item.IdModule" asp-page="Edit"><i class="fa fa-edit"></i> Modifier</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+
+
+            </div>
         </div>
     </div>
 
-    <div>
-        @if (Model.Modules.Count() == 0)
-        {
-            <p class="text-danger">Aucun module n'existe maintenant</p>
-        }
-        else
-        {
-            <table class="table text-white">
-                <thead>
-                    <tr>
-                        <th>Id Module</th>
-                        <th>Code</th>
-                        <th>Nom</th>
-                        <th>Elements</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Modules)
-                    {
-                    <tr>
-                        <td>@Html.DisplayFor(m => item.IdModule)</td>
-                        <td>@Html.DisplayFor(m => item.Code)</td>
-                        <td>@Html.DisplayFor(m => item.Nom)</td>
-                        <td>
-                            <a asp-page="../Elements/Index" asp-route-IdModule="@item.IdModule" style="text-decoration:none;">
-                                <i class="fa fa-th-list"></i> Voir eléments
-                            </a>
-                        </td>
-                        <td>
-                            <a class="btn btn-danger" asp-route-id="@item.IdModule" asp-page="Delete" asp-page-handler="Delete"><i class="fa fa-trash"></i> Supprimer</a>
-                            <a class="btn btn-success" asp-route-id="@item.IdModule" asp-page="Edit"><i class="fa fa-edit"></i> Modifier</a>
-                        </td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
-        }
-
-
-    </div>
 </div>
+
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

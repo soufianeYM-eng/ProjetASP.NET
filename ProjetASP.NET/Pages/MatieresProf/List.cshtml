@@ -1,0 +1,64 @@
+﻿@page
+@model ProjetASP.NET.Pages.MatieresProf.ListModel
+
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>List</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Element[0].Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Element[0].pourcentage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Element[0].Module)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Element[0].userId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Identity.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Element)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pourcentage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Module.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.userId)
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.IdElement">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.IdElement">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.IdElement">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

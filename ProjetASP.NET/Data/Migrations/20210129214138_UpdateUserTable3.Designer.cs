@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetASP.NET.Data;
 
 namespace ProjetASP.NET.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210129214138_UpdateUserTable3")]
+    partial class UpdateUserTable3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,9 +256,6 @@ namespace ProjetASP.NET.Data.Migrations
                     b.Property<float>("pourcentage")
                         .HasColumnType("real");
 
-                    b.Property<string>("userId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("IdElement");
 
                     b.HasIndex("IdModule");
@@ -320,16 +319,11 @@ namespace ProjetASP.NET.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdFil")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nom")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdModule");
-
-                    b.HasIndex("IdFil");
 
                     b.ToTable("Modules");
                 });
@@ -436,15 +430,6 @@ namespace ProjetASP.NET.Data.Migrations
                     b.HasOne("ProjetASP.NET.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("ProjetASP.NET.Models.Module", b =>
-                {
-                    b.HasOne("ProjetASP.NET.Models.Filiere", "Filiere")
-                        .WithMany()
-                        .HasForeignKey("IdFil")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

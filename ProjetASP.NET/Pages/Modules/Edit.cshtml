@@ -7,13 +7,14 @@
 }
 
 <form method="post">
+    @Html.HiddenFor(m => m.Module.IdModule)
+    @Html.HiddenFor(m => m.Module.IdFil)
     <div class="white-background border text-white">
         <h2 class="text-white">Modifier Module</h2>
         <br />
         <hr />
         <div class="form-group row">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Module.IdModule" />
             <div class="col-6">
                 <div class="mb-3">
                     <label asp-for="Module.Code" class="control-label"></label>
@@ -30,7 +31,7 @@
         <div class="row">
             <div class="col-6">
                 <button type="submit" class="btn btn-primary">Modifier</button>
-                <a asp-page="Index" class="btn btn-success">Retour</a>
+                <a asp-page="Index" asp-route-IdFil="@Model.Module.IdFil" class="btn btn-success">Retour</a>
             </div>
 
         </div>
@@ -38,6 +39,10 @@
 </form>
 
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
 }

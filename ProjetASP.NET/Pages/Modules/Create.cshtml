@@ -6,7 +6,11 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
+
+
+
 <form method="post">
+    @Html.HiddenFor(m => m.Module.IdFil)
     <div class="white-background border text-white">
         <h2 class="text-white">Ajouter Module</h2>
         <br />
@@ -29,7 +33,7 @@
         <div class="row">
             <div class="col-6">
                 <button type="submit" class="btn btn-primary">Ajouter</button>
-                <a asp-page="Index" class="btn btn-success">Retour</a>
+                <a asp-page="Index" asp-route-IdFil="@Model.Module.IdFil" class="btn btn-success">Retour</a>
             </div>
 
         </div>
@@ -44,3 +48,71 @@
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*
+    <form method="post">
+        <div class="white-background border text-white">
+            <h2 class="text-white">Ajouter Module</h2>
+            <br />
+            <hr />
+            <div class="form-group row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label asp-for="Module.Code" class="control-label"></label>
+                        <input asp-for="Module.Code" class="form-control" />
+                        <span asp-validation-for="Module.Code" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Module.Nom" class="control-label"></label>
+                        <input asp-for="Module.Nom" class="form-control" />
+                        <span asp-validation-for="Module.Nom" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                    <a asp-page="Index" class="btn btn-success">Retour</a>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+
+    @section Scripts{
+
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+
+    }
+*@

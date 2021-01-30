@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 
+
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
@@ -40,9 +41,6 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-page="/Departements/Index">Départements</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-page="/Modules/Index">Modules</a>
-                            </li>
 
                         }
                         @if (User.IsInRole(SD.StudentEndUser))
@@ -65,6 +63,22 @@
                         }
                         @if (User.IsInRole(SD.ProfessorEndUser))
                         {
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-page="/Edt/Index">Examens</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-page="/Modules/Index">Séances</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-page="/MatieresProf/List">Matières</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-page="/Modules/Index">Absences</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-page="/Modules/Index">Notes</a>
+                            </li>
 
                         }
 
