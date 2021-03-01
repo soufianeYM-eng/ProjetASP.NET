@@ -1,0 +1,98 @@
+﻿@page
+@model ProjetASP.NET.Pages.TravailPROF.ListerModel
+@{
+    ViewData["Title"] = "Eléments";
+
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div class="container white-background">
+    <div class="card text-dark">
+        <div class="card-header bg-dark text-light row container ml-0">
+            <div class="col-6">
+                <i class="fa fa-user-graduate fa-2x"></i>
+            </div>
+            <div class="col-6 text-right">
+                <a asp-page="../MatieresProf/Index" class="btn btn-dark" style="background-color: #2F3A4D">Retour</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+
+                </div>
+                <div class="col-6 offset-3">
+                    <div class="row form-group">
+                        <div class="col-4">
+                            <label asp-for="TravailEtTravauxVM.TravauxObj.Nom"></label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" asp-for="TravailEtTravauxVM.TravauxObj.Nom" readonly />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-4">
+                            <label asp-for="TravailEtTravauxVM.TravauxObj.Description"></label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" asp-for="TravailEtTravauxVM.TravauxObj.Description" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <br />
+                @if (Model.TravailEtTravauxVM.Travails.Count() == 0)
+                {
+                    <p class="text-danger">Aucun travail n'existe pour ce module</p>
+                }
+                else
+                {
+                    <table class="table text-dark">
+                        <thead>
+                            <tr>
+                                <th>Id Travail</th>
+                                <th>Nom</th>
+                                <th>Date Remis</th>
+                                <th>Nom étudiant</th>
+                                <th>Note</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.TravailEtTravauxVM.Travails)
+                            {
+                            <tr>
+                                <td>@Html.DisplayFor(m => item.idTravail)</td>
+                                <td>@Html.DisplayFor(m => item.Nom)</td>
+                                <td>@Html.DisplayFor(m => item.DateRemis)</td>
+                                <td>@Html.DisplayFor(m => item.ApplicationUser.FirstName)</td>
+                                <td>@Html.DisplayFor(m => item.Note)</td>
+
+                                <td>
+                                    <a class="btn btn-warning" asp-route-id="@item.idTravail" asp-page="Delete"><i class="fa fa-marker"></i> Affecter note</a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

@@ -25,5 +25,18 @@ namespace ProjetASP.NET.Data
         public DbSet<Element> Elements { get; set; }
 
         public DbSet<Etudiant> Etudiants { get; set; }
+         
+        public DbSet<Seance> Seances { get; set; }
+
+        public DbSet<Absence> Absences { get; set; }
+
+        public DbSet<Travail> Travails { get; set; }
+
+        public DbSet<NoteElement> NoteElements { get; set; }
+
+        public DbSet<Travaux> Travaux { get; set; }
+
+        
+
     }
 }

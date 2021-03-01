@@ -25,6 +25,8 @@ namespace ProjetASP.NET.Pages.Users
 
         public IList<ApplicationUser> ApplicationUsersList { get; set; }
 
+        public int nbrUtilisateurs {get;set;}
+
 
         public async Task<IActionResult> OnGet(string chercherCIN,string chercherEmail, string chercherNom)
         {
@@ -49,7 +51,8 @@ namespace ProjetASP.NET.Pages.Users
               )
               .ToListAsync();
 
-            
+
+            nbrUtilisateurs = ApplicationUsersList.Count();
 
             return Page(); 
         }

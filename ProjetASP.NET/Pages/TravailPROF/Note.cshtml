@@ -1,0 +1,57 @@
+﻿@page
+@model ProjetASP.NET.Pages.TravailPROF.NoteModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+    @Html.HiddenFor(m => m.Travail.idTravaux)
+    @Html.HiddenFor(m => m.Travail.idTravail)
+    <div class="white-background border text-white">
+        <h2 class="text-white">Modifier Travail</h2>
+        <br />
+        <hr />
+        <div class="form-group row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label asp-for="Travail.idTravail" class="control-label"></label>
+                    <input asp-for="Travail.idTravail" class="form-control" readonly/>
+                    <span asp-validation-for="Travail.idTravail" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Travail.Nom" class="control-label"></label>
+                    <input asp-for="Travail.Nom" class="form-control" readonly/>
+                    <span asp-validation-for="Travail.Nom" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Travail.DateRemis" class="control-label"></label>
+                    <input asp-for="Travail.DateRemis" class="form-control" readonly/>
+                    <span asp-validation-for="Travail.DateRemis" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Travail.Note" class="control-label"></label>
+                    <input asp-for="Travail.Note" class="form-control" />
+                    <span asp-validation-for="Travail.Note" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary">Modifier</button>
+                <a asp-page="Index" asp-route-IdFil="@Model.Travail.idTravaux" class="btn btn-success">Retour</a>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

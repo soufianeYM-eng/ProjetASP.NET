@@ -1,0 +1,106 @@
+﻿@page
+@model ProjetASP.NET.Pages.TravailPROF.IndexModel
+@{
+    ViewData["Title"] = "Travaux";
+
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div class="container white-background">
+    <div class="card text-dark">
+        <div class="card-header bg-dark text-light row container ml-0">
+            <div class="col-6">
+                <i class="fa fa-file fa-2x"></i>
+            </div>
+            <div class="col-6 text-right">
+                <a asp-page="../MatieresProf/Index" class="btn btn-dark" style="background-color: #2F3A4D">Retour</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-3">
+                    <a asp-page="Create" asp-route-IdElement="@Model.TravailEtElementVM.ElementObj.IdElement" class="btn btn-dark form-control" style="background-color: #2F3A4D">
+                        <i class="fa fa-plus"></i> Ajouter un travail
+                    </a>
+                </div>
+                <div class="col-6 offset-3">
+                    <div class="row form-group">
+                        <div class="col-4">
+                            <label asp-for="TravailEtElementVM.ElementObj.Nom"></label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" asp-for="TravailEtElementVM.ElementObj.Nom" readonly />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-4">
+                            <label asp-for="TravailEtElementVM.ElementObj.pourcentage"></label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" asp-for="TravailEtElementVM.ElementObj.pourcentage" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <br />
+                @if (Model.TravailEtElementVM.Travaux.Count() == 0)
+                {
+                    <p class="text-danger">Aucun travail n'existe pour ce module</p>
+                }
+                else
+                {
+                    <table class="table text-dark">
+                        <thead>
+                            <tr>
+                                <th>Id Travail</th>
+                                <th>Nom</th>
+                                <th>Decription</th>
+                                <th>Type</th>
+                                <th>Date Delai</th>
+                                <th>File</th>
+                                <th>Devoirs reçus</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.TravailEtElementVM.Travaux)
+                            {
+                            <tr>
+                                <td>@Html.DisplayFor(m => item.idTravaux)</td>
+                                <td>@Html.DisplayFor(m => item.Nom)</td>
+                                <td>@Html.DisplayFor(m => item.Description)</td>
+                                <td>@Html.DisplayFor(m => item.Type)</td>
+                                <td>@Html.DisplayFor(m => item.DateDelai)</td>
+                                <td><a href="~/Travaux/@Html.DisplayFor(m => item.File)">Télécharger</a></td>
+                                <td>
+                                    <a class="btn btn-warning" asp-route-idTravaux="@item.idTravaux" asp-page="Lister"><i class="fa fa-folder"></i> Lister</a>
+                                </td>
+
+                                <td>
+                                    <a class="btn btn-danger" asp-route-id="@item.idTravaux" asp-page="Delete" asp-page-handler="Delete"><i class="fa fa-trash"></i></a>
+                                    <a class="btn btn-success" asp-route-id="@item.idTravaux" asp-page="Edit"><i class="fa fa-edit"></i></a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

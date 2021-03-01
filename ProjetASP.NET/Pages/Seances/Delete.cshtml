@@ -1,0 +1,46 @@
+﻿@page
+@model ProjetASP.NET.Pages.Seances.DeleteModel
+@{
+    ViewData["Title"] = "Supprimer séance";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<form method="post">
+    @Html.HiddenFor(m => m.Seance.idSeance)
+    @Html.HiddenFor(m => m.Seance.IdElement)
+    <div class="white-background border text-white">
+        <h2 class="text-white">Supprimer séance</h2>
+        <br />
+        <hr />
+        <div class="form-group row">
+            <div class="col-8">
+                <div class="mb-3">
+                    <label asp-for="Seance.Nom" class="control-label"></label>
+                    <input asp-for="Seance.Nom" class="form-control" readonly/>
+                    <span asp-validation-for="Seance.Nom" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Seance.LienSeance" class="control-label"></label>
+                    <textarea asp-for="Seance.LienSeance" class="form-control" rows="3" readonly></textarea>
+                    <span asp-validation-for="Seance.LienSeance" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Seance.Date" class="control-label"></label>
+                    <input asp-for="Seance.Date" class="form-control" type="datetime-local" readonly/>
+                    <span asp-validation-for="Seance.Date" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('vous etes sur ?')">Supprimer</button>
+                <a asp-page="Index" asp-route-IdElement="@Model.Seance.IdElement" class="btn btn-success">Retour</a>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

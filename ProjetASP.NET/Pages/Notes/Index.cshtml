@@ -1,0 +1,66 @@
+﻿@page
+@model ProjetASP.NET.Pages.Notes.IndexModel
+@{
+    ViewData["Title"] = "Index";
+
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="border white-background">
+    <div class="form-group row">
+        <div class="col-6">
+            <h2 class="text-white">Absences</h2>
+        </div>
+    </div>
+
+    @if (Model.Etudiants == null)
+    {
+        <p class="text-danger">Veuillez selectionner la matière</p>
+    }
+    else
+    {
+        <table class="table text-white">
+            <thead>
+                <tr>
+                    <th>CIN</th>
+                    <th>Nom</th>
+                    <th>Prenom </th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Etudiants)
+                {
+                <tr>
+                    <td>@Html.DisplayFor(m => item.CIN)</td>
+                    <td>@Html.DisplayFor(m => item.FirstName)</td>
+                    <td>@Html.DisplayFor(m => item.LastName)</td>
+                    <td>
+                        <form method="post">
+                            <select asp-for="noteElement.IdElement" class="form-select">
+                                @foreach (var itemm in Model.Elements)
+                                {
+                                    <option value="@itemm.IdElement">@itemm.Nom</option>
+                                }
+                            </select>
+                            Note :<input asp-for="noteElement.note" type="number" />
+                            <button class="btn btn-warning" type="submit"><i class="fa fa-marker"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>
+</div>
+
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

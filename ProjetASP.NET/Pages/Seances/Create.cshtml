@@ -1,0 +1,54 @@
+﻿@page
+@model ProjetASP.NET.Pages.Seances.CreateModel
+@{
+    ViewData["Title"] = "Créer séance";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+
+
+<form method="post">
+    @Html.HiddenFor(m => m.Seance.IdElement)
+    <div class="white-background border text-white">
+        <h2 class="text-white">Créer séance</h2>
+        <br />
+        <hr />
+        <div class="form-group row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-8">
+                <div class="mb-3">
+                    <label asp-for="Seance.Nom" class="control-label"></label>
+                    <input asp-for="Seance.Nom" class="form-control" />
+                    <span asp-validation-for="Seance.Nom" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Seance.LienSeance" class="control-label">Lien séance (Meet ou Zoom)</label>
+                    <textarea asp-for="Seance.LienSeance" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Seance.LienSeance" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Seance.Date" class="control-label"></label>
+                    <input asp-for="Seance.Date" class="form-control" type="datetime-local"/>
+                    <span asp-validation-for="Seance.Date" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+                <a asp-page="Index" asp-route-IdElement="@Model.Seance.IdElement" class="btn btn-success">Retour</a>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

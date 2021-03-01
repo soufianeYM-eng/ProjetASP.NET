@@ -1,0 +1,69 @@
+﻿@page
+@model ProjetASP.NET.Pages.Absences.IndexModel
+@{
+    ViewData["Title"] = "Index";
+
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="border white-background">
+    <div class="form-group row">
+        <div class="col-6">
+            <h2 class="text-white">Absences</h2>
+        </div>
+        <div class="col-6 text-right">
+            <form asp-page="Index" method="post">
+                <select asp-for="element.IdElement" class="form-select">
+                    @foreach (var item in Model.Elements)
+                    {
+                        <option value="@item.IdElement">@item.Nom</option>
+                    }
+                </select>
+                <button class="btn btn-warning" type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+
+        @if (Model.Seances.Count() == 0)
+        {
+            <p class="text-danger">Aucun elément n'existe pour ce module</p>
+        }
+        else
+        {
+            <table class="table text-white">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Lien séance</th>
+                        <th>Date </th>
+                        <th>Marquer l'absence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Seances)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(m => item.Nom)</td>
+                            <td><a href="@Html.DisplayFor(m => item.LienSeance)">Lien séance</a></td>
+                            <td>@Html.DisplayFor(m => item.Date)</td>
+
+                            <td>
+                                <a class="btn btn-info" asp-route-id="@item.idSeance" asp-page="eleves"><i class="fa fa-school"></i> Marquer l'absence</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+    </div>
+</div>
+
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

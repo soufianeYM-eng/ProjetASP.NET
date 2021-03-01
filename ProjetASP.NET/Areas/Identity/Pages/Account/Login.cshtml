@@ -2,7 +2,7 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Connexion";
+    ViewData["Title"] = "ENSAT Cours | Connexion";
 }
 
 <div class="white-background row text-white">
@@ -46,16 +46,13 @@
         </div>
         <div class="col-md-5 col-md-offset-2">
             <section>
-                <h4>Use another service to log in.</h4>
+                <h4>ENSAT Cours - Gestion des cours à distance</h4>
                 <hr />
                 @{
                     if ((Model.ExternalLogins?.Count ?? 0) == 0)
                     {
                         <div>
-                            <p>
-                                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                                for details on setting up this ASP.NET application to support logging in via external services.
-                            </p>
+                                            <center><img src="~/img/ENSATLogo.png" style="height:226px;" /></center>
                         </div>
                     }
                     else

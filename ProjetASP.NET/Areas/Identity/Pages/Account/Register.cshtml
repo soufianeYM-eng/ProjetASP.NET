@@ -1,7 +1,7 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "ENSAT Cours | Création compte";
 }
 @using ProjetASP.NET.Utility
 
@@ -35,32 +35,32 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Input.CIN">CIN</label>
-                <input asp-for="Input.CIN" class="form-control" placeholder="KA125478" />
+                <input asp-for="Input.CIN" class="form-control" placeholder="KA125478" required/>
                 <span asp-validation-for="Input.CIN" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.FirstName">Prénom</label>
-                <input asp-for="Input.FirstName" class="form-control" />
+                <input asp-for="Input.FirstName" class="form-control" required/>
                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.LastName">Nom</label>
-                <input asp-for="Input.LastName" class="form-control" />
+                <input asp-for="Input.LastName" class="form-control" required/>
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.Email">Email Institutionnel</label>
-                <input asp-for="Input.Email" type="email" class="form-control" placeholder="nom.prenom@etu.uae.ac.ma" />
+                <input asp-for="Input.Email" type="email" class="form-control" placeholder="nom.prenom@etu.uae.ac.ma" required/>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.Password"> Mot de passe</label>
-                <input asp-for="Input.Password" class="form-control" />
+                <input asp-for="Input.Password" class="form-control" required/>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.ConfirmPassword">Confirmez votre mot de passe</label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <input asp-for="Input.ConfirmPassword" class="form-control" required/>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
 
@@ -79,34 +79,33 @@
             <div id="Etudiant" style="display: none;">
                 <select asp-for="Input.IdFil">
                     <option value="0">Select</option>
-                    <option value="1">Ginf</option>
-                    <option value="5">Gsea</option>
+                    <option value="1">GINF</option>
+                    <option value="5">GSEA</option>
 
                 </select><br />
             </div>
             <div id="Prof" style="display: none;">
                 <select asp-for="Input.IdDept">
                     <option value="0">Select</option>
-                    <option value="2">Mi</option>
+                    <option value="2">MI</option>
                     <option value="3">GEI</option>
                     <option value="4">SIC</option>
-
                 </select><br />
             </div>
 
             <div class="form-group">
                 <label asp-for="Input.Adress">Adresse</label>
-                <input asp-for="Input.Adress" class="form-control" placeholder="5 Rue Fes Résidence" />
+                <input asp-for="Input.Adress" class="form-control" placeholder="5 Rue Fes Résidence" required/>
                 <span asp-validation-for="Input.Adress" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.City">Ville</label>
-                <input asp-for="Input.City" class="form-control" placeholder="Tanger" />
+                <input asp-for="Input.City" class="form-control" placeholder="Tanger" required/>
                 <span asp-validation-for="Input.City" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.PhoneNumber">Tél</label>
-                <input asp-for="Input.PhoneNumber" type="number" class="form-control" placeholder="+212654875986" />
+                <input asp-for="Input.PhoneNumber" type="number" class="form-control" placeholder="+212654875986" required/>
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary">S'enregistrer</button>
@@ -114,17 +113,14 @@
     </div>
     <div class="col-md-6 col-md-offset-2">
         <section>
-            <h4>Use another service to register.</h4>
+            <h4>ENSAT Cours - Gestion des cours à distance</h4>
             <hr />
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
-                    </div>
+                        <div>
+                            <center><img src="~/img/ENSATLogo.png" style="height:226px;" /></center>
+                        </div>
                 }
                 else
                 {

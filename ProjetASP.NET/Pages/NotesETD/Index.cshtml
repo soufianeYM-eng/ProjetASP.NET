@@ -1,0 +1,66 @@
+﻿@page
+@model ProjetASP.NET.Pages.NotesETD.IndexModel
+@{
+    ViewData["Title"] = "Index";
+
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="border white-background">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-white">Absences</h2>
+        </div>
+    </div>
+
+    <div>
+        @if (Model.notes.Count() == 0)
+        {
+            <p class="text-danger">Aucune absence</p>
+        }
+        else
+        {
+            <table class="table text-white">
+                <thead>
+                    <tr>
+                        <th>Id Note</th>
+                        <th>Id Element</th>
+                        <th>Note</th>
+                        <th>Resultat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.notes)
+                    {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.idNote)</td>
+                        <td>@Html.DisplayFor(m => item.IdElement)</td>
+                        <td>@Html.DisplayFor(m => item.note)/20</td>
+                        <td>
+                            @if (@item.note >= 12)
+                            {
+                                <p>V</p>
+                            }
+                            else
+                            {
+                                <p>NV</p>
+                            }
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+
+    </div>
+</div>
+
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

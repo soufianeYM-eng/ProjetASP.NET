@@ -15,7 +15,7 @@ namespace ProjetASP.NET.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.11")
+                .HasAnnotation("ProductVersion", "3.1.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -221,6 +221,31 @@ namespace ProjetASP.NET.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ProjetASP.NET.Models.Absence", b =>
+                {
+                    b.Property<int>("idAbsence")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("idEtudiant")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("idSeance")
+                        .HasColumnType("int");
+
+                    b.HasKey("idAbsence");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("idSeance");
+
+                    b.ToTable("Absences");
+                });
+
             modelBuilder.Entity("ProjetASP.NET.Models.Departement", b =>
                 {
                     b.Property<int>("IdDept")
@@ -334,6 +359,131 @@ namespace ProjetASP.NET.Data.Migrations
                     b.ToTable("Modules");
                 });
 
+            modelBuilder.Entity("ProjetASP.NET.Models.NoteElement", b =>
+                {
+                    b.Property<int>("idNote")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdElement")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("idEtudiant")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("note")
+                        .HasColumnType("float");
+
+                    b.HasKey("idNote");
+
+                    b.HasIndex("IdElement");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("NoteElements");
+                });
+
+            modelBuilder.Entity("ProjetASP.NET.Models.Seance", b =>
+                {
+                    b.Property<int>("idSeance")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdElement")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LienSeance")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("idSeance");
+
+                    b.HasIndex("IdElement");
+
+                    b.ToTable("Seances");
+                });
+
+            modelBuilder.Entity("ProjetASP.NET.Models.Travail", b =>
+                {
+                    b.Property<int>("idTravail")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DateRemis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Note")
+                        .HasColumnType("float");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("idTravaux")
+                        .HasColumnType("int");
+
+                    b.HasKey("idTravail");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("idTravaux");
+
+                    b.ToTable("Travails");
+                });
+
+            modelBuilder.Entity("ProjetASP.NET.Models.Travaux", b =>
+                {
+                    b.Property<int>("idTravaux")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DateDelai")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("File")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdElement")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("idTravaux");
+
+                    b.HasIndex("IdElement");
+
+                    b.ToTable("Travaux");
+                });
+
             modelBuilder.Entity("ProjetASP.NET.Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -416,6 +566,19 @@ namespace ProjetASP.NET.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ProjetASP.NET.Models.Absence", b =>
+                {
+                    b.HasOne("ProjetASP.NET.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("ProjetASP.NET.Models.Seance", "seance")
+                        .WithMany()
+                        .HasForeignKey("idSeance")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ProjetASP.NET.Models.Element", b =>
                 {
                     b.HasOne("ProjetASP.NET.Models.Module", "Module")
@@ -443,6 +606,50 @@ namespace ProjetASP.NET.Data.Migrations
                     b.HasOne("ProjetASP.NET.Models.Filiere", "Filiere")
                         .WithMany()
                         .HasForeignKey("IdFil")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProjetASP.NET.Models.NoteElement", b =>
+                {
+                    b.HasOne("ProjetASP.NET.Models.Element", "Element")
+                        .WithMany()
+                        .HasForeignKey("IdElement")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjetASP.NET.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("ProjetASP.NET.Models.Seance", b =>
+                {
+                    b.HasOne("ProjetASP.NET.Models.Element", "Element")
+                        .WithMany()
+                        .HasForeignKey("IdElement")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProjetASP.NET.Models.Travail", b =>
+                {
+                    b.HasOne("ProjetASP.NET.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("ProjetASP.NET.Models.Travaux", "Travaux")
+                        .WithMany()
+                        .HasForeignKey("idTravaux")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProjetASP.NET.Models.Travaux", b =>
+                {
+                    b.HasOne("ProjetASP.NET.Models.Element", "Element")
+                        .WithMany()
+                        .HasForeignKey("IdElement")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

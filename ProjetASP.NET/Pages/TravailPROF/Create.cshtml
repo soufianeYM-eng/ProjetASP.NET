@@ -1,0 +1,67 @@
+﻿@page
+@model ProjetASP.NET.Pages.TravailPROF.CreateModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    var filePath = "~/Travaux/" + (Model.Travaux.File ?? "file.pdf");
+}
+
+
+<form method="post" enctype="multipart/form-data">
+    @Html.HiddenFor(m => m.Travaux.IdElement)
+    @Html.HiddenFor(m => m.Travaux.File)
+    <div class="white-background border text-white">
+        <h2 class="text-white">Ajouter Travail</h2>
+        <br />
+        <hr />
+        <div class="form-group row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-8">
+                <div class="mb-3">
+                    <label asp-for="Travaux.Nom" class="control-label"></label>
+                    <input asp-for="Travaux.Nom" class="form-control" />
+                    <span asp-validation-for="Travaux.Nom" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Travaux.Description" class="control-label"></label>
+                    <textarea asp-for="Travaux.Description" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Travaux.Description" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <select onchange="yesnoCheck(this);" asp-for="Travaux.Type">
+                        <option value="Devoir">Devoir</option>
+                        <option value="TP">TP</option>
+                        <option value="Examen">Examen</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Travaux.DateDelai" class="control-label"></label>
+                    <input asp-for="Travaux.DateDelai" class="form-control" type="datetime-local" />
+                    <span asp-validation-for="Travaux.DateDelai" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="File" class="control-label"></label>
+                    <input asp-for="File" class="form-control" type="file" rows="3">
+                    <span asp-validation-for="File" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+                <a asp-page="Index" asp-route-IdFil="@Model.Travaux.IdElement" class="btn btn-success">Retour</a>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

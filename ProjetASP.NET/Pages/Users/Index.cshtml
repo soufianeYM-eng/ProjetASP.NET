@@ -7,12 +7,25 @@
 }
 <form asp-page="Index" method="get">
     <div class="border white-background">
+
         <div class="row">
             <div class="col-6">
                 <h2 class="text-white">Liste des utilisateurs</h2>
             </div>
             <div class="col-6 text-right">
                 <a class="btn btn-primary" asp-page="/Account/Register" asp-area="Identity"><i class="fa fa-plus-square"></i> Ajouter un utilisateur</a>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header">
+                        Nombre d'utilisateurs
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">@Model.nbrUtilisateurs</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -61,17 +74,17 @@
                     <tbody>
                         @foreach (var item in Model.ApplicationUsersList)
                         {
-                        <tr>
-                            <td>@Html.DisplayFor(m => item.CIN)</td>
-                            <td>@Html.DisplayFor(m => item.LastName)</td>
-                            <td>@Html.DisplayFor(m => item.FirstName)</td>
-                            <td>@Html.DisplayFor(m => item.Email)</td>
-                            <td>@Html.DisplayFor(m => item.PhoneNumber)</td>
-                            <td>
-                                <a class="btn btn-danger" asp-route-id="@item.Id" asp-page="Delete" asp-page-handler="Delete"><i class="fa fa-trash"></i></a>
-                                <a class="btn btn-success" asp-route-id="@item.Id" asp-page="Edit"><i class="fa fa-edit"></i></a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>@Html.DisplayFor(m => item.CIN)</td>
+                                <td>@Html.DisplayFor(m => item.LastName)</td>
+                                <td>@Html.DisplayFor(m => item.FirstName)</td>
+                                <td>@Html.DisplayFor(m => item.Email)</td>
+                                <td>@Html.DisplayFor(m => item.PhoneNumber)</td>
+                                <td>
+                                    <a class="btn btn-danger" asp-route-id="@item.Id" asp-page="Delete" asp-page-handler="Delete"><i class="fa fa-trash"></i></a>
+                                    <a class="btn btn-success" asp-route-id="@item.Id" asp-page="Edit"><i class="fa fa-edit"></i></a>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>

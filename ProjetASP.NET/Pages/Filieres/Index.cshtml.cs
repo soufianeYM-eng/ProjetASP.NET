@@ -23,10 +23,14 @@ namespace ProjetASP.NET.Pages.Filieres
         }
 
         public IList<Filiere> Filieres { get; set; }
+
+        public int nbrFiliere {get;set;}
         
         public async Task<IActionResult> OnGetAsync()
         {
             Filieres = await db.Filieres.ToListAsync();
+
+            nbrFiliere = Filieres.Count();
 
             return Page();
         }

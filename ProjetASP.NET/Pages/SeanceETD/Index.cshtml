@@ -1,0 +1,57 @@
+﻿@page
+@model ProjetASP.NET.Pages.SeanceETD.IndexModel
+@{
+    ViewData["Title"] = "Index";
+
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="border white-background">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-white">Seances</h2>
+        </div>
+    </div>
+
+    <div>
+        @if (Model.seances.Count() == 0)
+        {
+            <p class="text-danger">Aucune séance n'existe maintenant</p>
+        }
+        else
+        {
+            <table class="table text-white">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Lien séance</th>
+                        <th>Date séance</th>
+                        <th>Element</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.seances)
+                    {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.Nom)</td>
+                        <td><a href="@Html.DisplayFor(m => item.LienSeance)">Lien Seance</a></td>
+                        <td>@Html.DisplayFor(m => item.Date)</td>
+                        <td>@Html.DisplayFor(m => item.Element.Nom)</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+
+    </div>
+</div>
+
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

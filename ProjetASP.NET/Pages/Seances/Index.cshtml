@@ -1,0 +1,99 @@
+﻿@page
+@model ProjetASP.NET.Pages.Seances.IndexModel
+@{
+    ViewData["Title"] = "Séances";
+
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div class="container white-background">
+    <div class="card text-dark">
+        <div class="card-header bg-dark text-light row container ml-0">
+            <div class="col-6">
+                <i class="fa fa-video fa-2x"></i>
+            </div>
+            <div class="col-6 text-right">
+                <a asp-page="../MatieresProf/Index" class="btn btn-dark" style="background-color: #2F3A4D">Retour</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-3">
+                    <a asp-page="Create" asp-route-IdElement="@Model.SeanceEtElementsVM.ElementObj.IdElement" class="btn btn-dark form-control" style="background-color: #2F3A4D">
+                        <i class="fa fa-plus"></i> Ajouter une Séance
+                    </a>
+                </div>
+                <div class="col-6 offset-3">
+                    <div class="row form-group">
+                        <div class="col-4">
+                            <label asp-for="SeanceEtElementsVM.ElementObj.Nom"></label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" asp-for="SeanceEtElementsVM.ElementObj.Nom" readonly />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-4">
+                            <label asp-for="SeanceEtElementsVM.ElementObj.pourcentage">Pourcentage</label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" asp-for="SeanceEtElementsVM.ElementObj.pourcentage" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <br />
+                @if (Model.SeanceEtElementsVM.Seances.Count() == 0)
+                {
+                    <p class="text-danger">Aucun elément n'existe pour ce module</p>
+                }
+                else
+                {
+                    <table class="table text-dark">
+                        <thead>
+                            <tr>
+                                <th>Id Seance</th>
+                                <th>Nom</th>
+                                <th>Lien Seance</th>
+                                <th>Lien Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.SeanceEtElementsVM.Seances)
+                            {
+                            <tr>
+                                <td>@Html.DisplayFor(m => item.idSeance)</td>
+                                <td>@Html.DisplayFor(m => item.Nom)</td>
+                                <td><a href="@Html.DisplayFor(m => item.LienSeance)">Lien séance</a></td>
+                                <td>@Html.DisplayFor(m => item.Date)</td>
+
+                                <td>
+                                    <a class="btn btn-danger" asp-route-id="@item.idSeance" asp-page="Delete" asp-page-handler="Delete"><i class="fa fa-trash"></i> Supprimer</a>
+                                    <a class="btn btn-success" asp-route-id="@item.idSeance" asp-page="Edit"><i class="fa fa-edit"></i> Modifier</a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

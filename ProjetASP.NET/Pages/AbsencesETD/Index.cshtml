@@ -1,0 +1,63 @@
+﻿@page
+@model ProjetASP.NET.Pages.AbsencesETD.IndexModel
+@{
+    ViewData["Title"] = "Index";
+
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="border white-background">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-white">Absences</h2>
+        </div>
+    </div>
+
+    <div>
+        @if (Model.absences.Count() == 0)
+        {
+            <p class="text-danger">Aucune absence</p>
+        }
+        else
+        {
+            <table class="table text-white">
+                <thead>
+                    <tr>
+                        <th>Id Absence</th>
+                        <th>Id Seance</th>
+                        <th>Justifier Absence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.absences)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(m => item.idAbsence)</td>
+                            <td>@Html.DisplayFor(m => item.idSeance)</td>
+                            <td>
+                                <form method="post">
+                                    <div class="mb-3">
+                                        <input asp-for="File" class="form-control" type="file" rows="3">
+                                        <span asp-validation-for="File" class="text-danger"></span>
+                                    </div>
+                                    <button type="submit" class="btn btn-warning">Ajouter</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+
+    </div>
+</div>
+
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

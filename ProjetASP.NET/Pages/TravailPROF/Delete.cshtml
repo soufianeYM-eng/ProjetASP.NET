@@ -1,0 +1,58 @@
+﻿@page
+@model ProjetASP.NET.Pages.TravailPROF.DeleteModel
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+    @Html.HiddenFor(m => m.Travaux.idTravaux)
+    @Html.HiddenFor(m => m.Travaux.IdElement)
+    <div class="white-background border text-white">
+        <h2 class="text-white">Supprimer Travail</h2>
+        <br />
+        <hr />
+        <div class="form-group row">
+            <div class="col-8">
+                <div class="mb-3">
+                    <label asp-for="Travaux.Nom" class="control-label"></label>
+                    <input asp-for="Travaux.Nom" class="form-control" readonly/>
+                    <span asp-validation-for="Travaux.Nom" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Travaux.Description" class="control-label"></label>
+                    <textarea asp-for="Travaux.Description" class="form-control" rows="3" readonly></textarea>
+                    <span asp-validation-for="Travaux.Description" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Travaux.Type" class="control-label"></label>
+                    <input asp-for="Travaux.Type" class="form-control" readonly />
+                    <span asp-validation-for="Travaux.Type" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Travaux.DateDelai" class="control-label"></label>
+                    <input asp-for="Travaux.DateDelai" class="form-control" type="datetime-local" readonly/>
+                    <span asp-validation-for="Travaux.DateDelai" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Travaux.File" class="control-label"></label>
+                    <input asp-for="Travaux.File" class="form-control" type="file" rows="3" readonly>
+                    <span asp-validation-for="Travaux.File" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('vous etes sur ?')">Supprimer</button>
+                <a asp-page="Index" asp-route-IdElement="@Model.Travaux.IdElement" class="btn btn-success">Retour</a>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
